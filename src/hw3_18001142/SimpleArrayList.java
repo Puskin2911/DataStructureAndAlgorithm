@@ -7,7 +7,7 @@ import java.util.Objects;
 public class SimpleArrayList<E> implements ListInterface<E> {
 	private E[] array;
 	private int n = 0;
-	private static final int defaultSize = 1000;
+	private static final int defaultSize = 100;
 	private int capacity;
 	private static final int expandSize = 32;
 

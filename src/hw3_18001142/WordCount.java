@@ -66,7 +66,6 @@ public class WordCount {
 
 	public static void main(String[] args) {
 		File file = new File("resource/regex.txt");
-
 		Scanner scanner;
 		String words = "";
 		try {
@@ -84,5 +83,4 @@ public class WordCount {
 		SimpleArrayList<WordCount> list = getWordCount(words);
 		System.out.println(list);
 	}
-
 }
