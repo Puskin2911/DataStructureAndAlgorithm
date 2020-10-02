@@ -85,4 +85,13 @@ public interface ListInterface<E> extends Iterable<E> {
 	 * @return {@code true} if this list contains no elements.
 	 */
 	public boolean isEmpty();
+	
+	/**
+	 * Return position of specific element
+	 * 
+	 * @param element element need to find index
+	 * @return position of specific element
+	 * @throws NullPointerException if element is null
+	 */
+	public int indexOf(E element);
 }

@@ -1,0 +1,4 @@
+Java provides the java.util.regex package for pattern matching with regular expressions.
+Java regular expressions are very similar to the Perl programming language and very easy to learn.
+A a regular expression is a special sequence of characters that helps you match or find other strings or sets of strings, using a specialized syntax held in a pattern.
+They can be used to search, edit, or manipulate text and data.

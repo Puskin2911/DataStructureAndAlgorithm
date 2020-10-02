@@ -214,6 +214,12 @@ public class SimpleLinkedList<E> implements ListInterface<E> {
 	}
 
 	@Override
+	public int indexOf(E element) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
 	public Iterator<E> iterator() {
 		Iterator<E> iter = new Iterator<E>() {
 			private Node<E> lastReturned;
@@ -258,14 +264,14 @@ public class SimpleLinkedList<E> implements ListInterface<E> {
 	}
 
 	private class BackwardIterator implements Iterator<E> {
-		private Node<E> lastReturned;
+//		private Node<E> lastReturned;
 		private Node<E> next;
-		private int nextIndex;
+//		private int nextIndex;
 
 		public BackwardIterator() {
-			lastReturned = null;
+//			lastReturned = null;
 			next = bot;
-			nextIndex = size - 1;
+//			nextIndex = size - 1;
 		}
 
 		@Override

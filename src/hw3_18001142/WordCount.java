@@ -55,7 +55,8 @@ public class WordCount {
 			if (list.isContain(wordObject) == false) {
 				list.add(wordObject);
 			} else {
-//				wordObject = list.get(wordObject);
+				int index = list.indexOf(wordObject);
+				wordObject = list.get(index);
 				wordObject.setCount(wordObject.getCount() + 1);
 			}
 		}
@@ -64,7 +65,7 @@ public class WordCount {
 	}
 
 	public static void main(String[] args) {
-		File file = new File("data.txt");
+		File file = new File("resource/regex.txt");
 
 		Scanner scanner;
 		String words = "";
@@ -81,7 +82,7 @@ public class WordCount {
 //		String words = scanner.nextLine();
 
 		SimpleArrayList<WordCount> list = getWordCount(words);
-//		list.printArray();
+		System.out.println(list);
 	}
 
 }

@@ -112,9 +112,21 @@ public class SimpleArrayList<E> implements ListInterface<E> {
 	}
 
 	@Override
+	public int indexOf(E element) {
+		if (element == null)
+			throw new NullPointerException("Element must be not null");
+		for (int i = 0; i < n; i++) {
+			if (Objects.equals(array[i], element)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	@Override
 	public boolean isContain(E element) {
 		if (element == null)
-			throw new NullPointerException("Element must not be mull");
+			throw new NullPointerException("Element must be not be null");
 		for (int i = 0; i < n; i++) {
 			if (Objects.equals(array[i], element))
 				return true;
