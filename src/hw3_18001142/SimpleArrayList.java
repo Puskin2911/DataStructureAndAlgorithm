@@ -2,6 +2,7 @@ package hw3_18001142;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 public class SimpleArrayList<E> implements ListInterface<E> {
@@ -46,6 +47,8 @@ public class SimpleArrayList<E> implements ListInterface<E> {
 
 			@Override
 			public E next() {
+				if (!hasNext())
+					throw new NoSuchElementException("Current iterator have no next element");
 				return array[currentIndex++];
 			}
 		};
@@ -65,10 +68,10 @@ public class SimpleArrayList<E> implements ListInterface<E> {
 	}
 
 	@Override
-	public E get(int i) {
-		if (i < 0 || i >= n)
-			throw new IndexOutOfBoundsException("Index " + i + " out of bound " + n);
-		return array[i];
+	public E get(int index) {
+		if (index < 0 || index >= n)
+			throw new IndexOutOfBoundsException(index);
+		return array[index];
 	}
 
 	@Override
@@ -76,7 +79,7 @@ public class SimpleArrayList<E> implements ListInterface<E> {
 		if (index < 0 || index >= n)
 			throw new IndexOutOfBoundsException(index);
 		if (element == null)
-			throw new NullPointerException("Element must not be mull");
+			throw new NullPointerException("Element must be not null");
 		array[index] = element;
 	}
 
@@ -98,7 +101,9 @@ public class SimpleArrayList<E> implements ListInterface<E> {
 	@Override
 	public boolean remove(E element) {
 		if (element == null)
-			throw new NullPointerException("Element must not be mull");
+			throw new NullPointerException("Element must be not null");
+		if (n == 0)
+			throw new NoSuchElementException("List is empty");
 		for (int i = 0; i < n; i++) {
 			if (Objects.equals(array[i], element)) {
 				for (int index = i; index < n - 1; index++) {
@@ -126,7 +131,7 @@ public class SimpleArrayList<E> implements ListInterface<E> {
 	@Override
 	public boolean isContain(E element) {
 		if (element == null)
-			throw new NullPointerException("Element must be not be null");
+			throw new NullPointerException("Element must be not null");
 		for (int i = 0; i < n; i++) {
 			if (Objects.equals(array[i], element))
 				return true;

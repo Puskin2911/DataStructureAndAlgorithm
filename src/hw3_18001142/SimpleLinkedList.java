@@ -2,6 +2,7 @@ package hw3_18001142;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class SimpleLinkedList<E> implements ListInterface<E> {
 	private static class Node<E> {
@@ -79,7 +80,7 @@ public class SimpleLinkedList<E> implements ListInterface<E> {
 			throw new IndexOutOfBoundsException(index);
 		int i = 0;
 		Node<E> node = top;
-		while (i < index - 1) {
+		while (i < index) {
 			i++;
 			node = node.next;
 		}
@@ -98,7 +99,7 @@ public class SimpleLinkedList<E> implements ListInterface<E> {
 		// Get Node at index
 		int i = 0;
 		Node<E> node = top;
-		while (i < index - 1 && node != null) {
+		while (i < index && node != null) {
 			i++;
 			node = node.next;
 		}
@@ -195,7 +196,11 @@ public class SimpleLinkedList<E> implements ListInterface<E> {
 		if (element == null)
 			throw new NullPointerException("Element must be not null");
 		if (top == null)
-			return false;
+			throw new NoSuchElementException("List is empty");
+		if (Objects.equals(top.data, element)) {
+			removeTop();
+			return true;
+		}
 		Node<E> node = top;
 		while (node.next != null) {
 			if (node.next.data.equals(element)) {
@@ -205,18 +210,23 @@ public class SimpleLinkedList<E> implements ListInterface<E> {
 			}
 			node = node.next;
 		}
-		if (top.data.equals(element)) {
-			top = top.next;
-			size--;
-			return true;
-		}
 		return false;
 	}
 
 	@Override
 	public int indexOf(E element) {
-		// TODO Auto-generated method stub
-		return 0;
+		if (element == null)
+			throw new NullPointerException("Element must be not null");
+		int index = 0;
+		Node<E> node = top;
+		while (node != null) {
+			if (Objects.equals(node.data, element)) {
+				return index;
+			}
+			index++;
+			node = node.next;
+		}
+		return -1;
 	}
 
 	@Override
@@ -234,7 +244,7 @@ public class SimpleLinkedList<E> implements ListInterface<E> {
 			@Override
 			public E next() {
 				if (!hasNext())
-					throw new NoSuchElementException("List is empty");
+					throw new NoSuchElementException("Current iterator have no next element");
 				lastReturned = next;
 				next = next.next;
 				nextIndex++;
@@ -245,7 +255,7 @@ public class SimpleLinkedList<E> implements ListInterface<E> {
 			@Override
 			public void remove() {
 				if (lastReturned == null)
-					throw new IllegalStateException();
+					throw new IllegalStateException("Just one remove for one next() call");
 				SimpleLinkedList.this.remove(nextIndex - 1);
 				nextIndex--;
 				lastReturned = null;
@@ -255,41 +265,40 @@ public class SimpleLinkedList<E> implements ListInterface<E> {
 	}
 
 	/**
-	 * Returns an backward iterator over elements of type E.
-	 * 
-	 * @return an iterator
+	 * // * Returns an backward iterator over elements of type E. // * // * @return
+	 * an iterator //
 	 */
-	public Iterator<E> backwardIterator() {
-		return new BackwardIterator();
-	}
-
-	private class BackwardIterator implements Iterator<E> {
+//	public Iterator<E> backwardIterator() {
+//		return new BackwardIterator();
+//	}
+//
+//	private class BackwardIterator implements Iterator<E> {
 //		private Node<E> lastReturned;
-		private Node<E> next;
+//		private Node<E> next;
 //		private int nextIndex;
-
-		public BackwardIterator() {
+//
+//		public BackwardIterator() {
 //			lastReturned = null;
-			next = bot;
+//			next = bot;
 //			nextIndex = size - 1;
-		}
-
-		@Override
-		public boolean hasNext() {
-			return next != null;
-		}
-
-		@Override
-		public E next() {
-			// TODO Doubly Linked Implement for this
-			return null;
-		}
-
-		@Override
-		public void remove() {
-			// TODO Auto-generated method stub
-			Iterator.super.remove();
-		}
-
-	}
+//		}
+//
+//		@Override
+//		public boolean hasNext() {
+//			return next != null;
+//		}
+//
+//		@Override
+//		public E next() {
+//			// TODO Doubly Linked Implement for this
+//			return null;
+//		}
+//
+//		@Override
+//		public void remove() {
+//			// TODO Auto-generated method stub
+//			Iterator.super.remove();
+//		}
+//
+//	}
 }
